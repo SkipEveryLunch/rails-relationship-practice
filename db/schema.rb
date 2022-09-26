@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_26_014955) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_022028) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "articles_genres", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.integer "genre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id", "genre_id"], name: "index_articles_genres_on_article_id_and_genre_id", unique: true
+    t.index ["article_id"], name: "index_articles_genres_on_article_id"
+    t.index ["genre_id"], name: "index_articles_genres_on_genre_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -24,4 +34,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_014955) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "articles_genres", "articles"
+  add_foreign_key "articles_genres", "genres"
 end

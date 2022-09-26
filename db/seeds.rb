@@ -1,5 +1,5 @@
 table_names = %w(
-    articles genres
+    articles genres articles_genres
   )
   
   table_names.each do |table_name|
