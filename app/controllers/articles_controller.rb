@@ -3,8 +3,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   def index
-    @articles = Article.all
-
+    @articles = Article.joins(:genres).all.select(:id,:title,:content,:name)
     render json: @articles
   end
 
